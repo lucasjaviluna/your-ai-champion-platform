@@ -1,0 +1,303 @@
+---
+sidebar_position: 3
+title: ¿Cómo "piensa" un LLM?
+description: Comprende cómo funciona internamente un modelo de lenguaje y por qué puede mantener conversaciones, escribir código y responder preguntas sin "pensar" como un ser humano.
+---
+
+# ¿Cómo "piensa" un LLM?
+
+## 🎯 Objetivos de aprendizaje
+
+Al finalizar este capítulo serás capaz de:
+
+- Comprender qué hace realmente un LLM cuando recibe un mensaje.
+- Diferenciar "comprender" de "predecir".
+- Entender por qué un modelo puede parecer inteligente sin tener conciencia.
+- Identificar las etapas generales del procesamiento de una consulta.
+
+---
+
+## ⏱ Tiempo estimado
+
+25 minutos
+
+---
+
+## 📚 Prerrequisitos
+
+- ¿Qué es la IA Generativa?
+- Historia de la IA y los LLMs.
+
+---
+
+# La pregunta equivocada
+
+Cuando alguien usa ChatGPT por primera vez suele preguntar:
+
+> **¿Cómo piensa la IA?**
+
+La respuesta corta es:
+
+**No piensa.**
+
+Y entender esto es uno de los conceptos más importantes de todo el curso.
+
+---
+
+# Entonces... ¿qué hace?
+
+Cada vez que escribes un mensaje, el modelo intenta responder una única pregunta:
+
+> **¿Cuál es el siguiente fragmento de texto más probable dadas todas las palabras anteriores?**
+
+No busca en Internet (salvo que la aplicación lo habilite).
+
+No recuerda una base de datos secreta.
+
+No razona como un ser humano.
+
+Su trabajo consiste en estimar probabilidades.
+
+---
+
+# Una analogía
+
+Imagina que estás leyendo una frase.
+
+> "Los peces viven en el..."
+
+¿Qué palabra esperarías?
+
+Probablemente:
+
+- mar
+- océano
+- agua
+- río
+
+No calculaste una fórmula.
+
+Tu cerebro utilizó contexto y experiencia para anticipar la siguiente palabra.
+
+Un LLM hace algo parecido.
+
+La diferencia es que utiliza enormes modelos matemáticos entrenados con cantidades masivas de texto.
+
+---
+
+# El ciclo de una conversación
+
+Aunque internamente el proceso es muy complejo, podemos entenderlo en cinco pasos.
+
+## Paso 1. Recibe el texto
+
+```
+Explícame qué es un Transformer.
+```
+
+Para nosotros es una frase.
+
+Para el modelo todavía no.
+
+---
+
+## Paso 2. Divide el texto
+
+El modelo transforma la entrada en pequeñas unidades llamadas **tokens**.
+
+Todavía no explicaremos cómo funciona la tokenización.
+
+Lo veremos en el próximo capítulo.
+
+Por ahora basta con saber que el modelo no trabaja directamente con palabras.
+
+Trabaja con tokens.
+
+---
+
+## Paso 3. Analiza el contexto
+
+Ahora el modelo observa todos los tokens recibidos.
+
+No analiza únicamente el último.
+
+Observa toda la conversación disponible.
+
+Aquí ocurre gran parte de la "magia".
+
+Más adelante estudiaremos cómo funciona este mecanismo mediante **Attention**.
+
+---
+
+## Paso 4. Calcula probabilidades
+
+El modelo genera una enorme lista de posibles tokens.
+
+Por ejemplo:
+
+| Token | Probabilidad |
+|--------|--------------|
+| Transformer | 42% |
+| modelo | 18% |
+| arquitectura | 12% |
+| algoritmo | 7% |
+| sistema | 5% |
+| ... | ... |
+
+No significa que siempre elija el de mayor probabilidad.
+
+Existen parámetros como temperatura y Top-p que modifican esa decisión.
+
+Los veremos en capítulos posteriores.
+
+---
+
+## Paso 5. Repite el proceso
+
+Una vez elegido un token...
+
+Ese token pasa a formar parte del contexto.
+
+Y comienza nuevamente el mismo proceso.
+
+Una y otra vez.
+
+Miles de veces.
+
+Hasta completar la respuesta.
+
+---
+
+# Entonces...
+
+Un LLM no genera una respuesta completa de una sola vez.
+
+La construye token por token.
+
+Cada nuevo token depende de todos los anteriores.
+
+Eso explica por qué una respuesta puede cambiar completamente si modificamos una sola palabra del prompt.
+
+---
+
+# ¿Por qué parece inteligente?
+
+Porque fue entrenado con una enorme cantidad de información.
+
+Durante el entrenamiento aprendió relaciones entre conceptos.
+
+No memoriza únicamente frases.
+
+Aprende patrones estadísticos extremadamente complejos.
+
+Eso le permite producir respuestas coherentes incluso para preguntas que nunca vio exactamente durante el entrenamiento.
+
+---
+
+# ¿Significa que entiende?
+
+Aquí aparece uno de los debates más importantes de la IA.
+
+Cuando un modelo responde correctamente parece comprender.
+
+Pero internamente sigue realizando operaciones matemáticas sobre números.
+
+No posee:
+
+- conciencia;
+- emociones;
+- intención;
+- deseos;
+- experiencias personales.
+
+Lo que observamos es un comportamiento emergente derivado de un entrenamiento masivo.
+
+---
+
+# Error común
+
+❌ "El modelo sabe la respuesta."
+
+Una forma más precisa de decirlo sería:
+
+✅ "El modelo generó una secuencia de tokens con alta probabilidad de responder correctamente."
+
+La diferencia puede parecer pequeña.
+
+Pero cambia completamente nuestra forma de entender la IA.
+
+---
+
+# ¿Por qué a veces inventa información?
+
+Como el objetivo del modelo es continuar una secuencia de texto de forma coherente, en ocasiones genera información incorrecta con la misma seguridad que si fuera verdadera.
+
+A este fenómeno se lo conoce como **alucinación**.
+
+Más adelante veremos por qué ocurre y cómo reducirlo mediante técnicas como RAG, Tool Calling y validación externa.
+
+---
+
+# Lo veremos más adelante
+
+En este capítulo aparecieron varios conceptos nuevos.
+
+Cada uno tendrá su propio espacio:
+
+- Tokens
+- Embeddings
+- Context Window
+- Attention
+- Transformers
+- Temperatura
+- Top-p
+- RAG
+- Tool Calling
+
+No es necesario comprenderlos todavía.
+
+Los construiremos paso a paso.
+
+---
+
+# Conceptos clave
+
+- Un LLM no piensa como un ser humano.
+- Su tarea principal es predecir el siguiente token.
+- Cada token generado modifica el contexto.
+- Todo el proceso ocurre de forma iterativa.
+- El comportamiento inteligente surge del aprendizaje estadístico sobre enormes cantidades de datos.
+
+---
+
+# Resumen
+
+Los modelos de lenguaje no generan respuestas porque "sepan" la información o porque "piensen" como una persona.
+
+Generan respuestas porque, en cada paso, estiman cuál es el siguiente token más probable según el contexto disponible.
+
+Esa idea, aparentemente simple, es la base de toda la IA Generativa moderna.
+
+En los próximos capítulos veremos cómo ese proceso comienza con una pieza fundamental:
+
+> **Los tokens.**
+
+---
+
+## 📝 Ejercicios
+
+1. Explica con tus palabras qué significa "predecir el siguiente token".
+2. ¿Por qué un LLM no genera toda la respuesta de una sola vez?
+3. ¿Qué papel juega el contexto durante la generación?
+4. ¿Por qué un modelo puede producir información falsa con aparente seguridad?
+5. ¿Cuál es la diferencia entre "comprender" y "predecir"?
+
+---
+
+## 🎯 Desafío
+
+Imagina que eres un modelo de lenguaje.
+
+Completa, palabra por palabra, la siguiente frase explicando por qué elegiste cada palabra:
+
+> "La programación funcional permite..."
