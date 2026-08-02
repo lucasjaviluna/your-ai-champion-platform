@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
-title: Prompt Engineering Profesional: diseñar conversaciones, no preguntas
-description: Aprende a diseñar prompts profesionales que permitan colaborar eficazmente con modelos de IA en tareas de desarrollo de software.
+title: Prompt Engineering Profesional: del prompt a la especificación
+description: Aprende a diseñar conversaciones profesionales con IA y descubre por qué las especificaciones representan la siguiente evolución del Prompt Engineering.
 ---
 
 # Prompt Engineering Profesional
@@ -11,27 +11,30 @@ description: Aprende a diseñar prompts profesionales que permitan colaborar efi
 Al finalizar este capítulo podrás:
 
 - Comprender qué es realmente un prompt.
-- Diferenciar un prompt simple de una especificación de trabajo.
-- Diseñar prompts reutilizables.
-- Reducir respuestas ambiguas.
-- Crear conversaciones iterativas con IA.
+- Diseñar prompts profesionales y reutilizables.
+- Entender por qué el contexto es más importante que la longitud.
+- Aprender a trabajar mediante conversaciones iterativas.
+- Descubrir el concepto de Specification Engineering.
+- Comprender cómo evolucionar desde prompts hacia especificaciones.
 
 ---
 
 ## ⏱ Tiempo estimado
 
-45 minutos.
+50 minutos.
 
 ---
 
 # Introducción
 
-Muchos desarrolladores creen que Prompt Engineering consiste en aprender frases especiales.
+Cuando aparecieron los primeros asistentes de IA, surgió una nueva disciplina:
 
-Ejemplo:
+> Prompt Engineering.
+
+Durante un tiempo parecía que el éxito consistía en aprender frases especiales:
 
 ```
-Actúa como un experto...
+Actúa como...
 
 Piensa paso a paso...
 
@@ -39,57 +42,109 @@ Respira profundo...
 
 ```
 
-En realidad, esos son únicamente recursos.
+Sin embargo, con el paso de los meses quedó claro que esos patrones eran solamente herramientas.
 
-Lo importante es otra cosa.
+Los mejores resultados no provenían de "prompts mágicos".
 
-> Un modelo produce mejores resultados cuando comprende claramente el problema que debe resolver.
+Provenían de comprender correctamente el problema.
 
-Un buen prompt no intenta "engañar" al modelo.
+Por eso, en AI Champion utilizaremos una visión diferente:
 
-Intenta comunicar correctamente una tarea.
+> **Un prompt no es una pregunta. Es la especificación de una tarea.**
 
 ---
 
-# Un prompt es una especificación
+# ¿Qué es realmente un prompt?
 
-Pensemos en una analogía.
+Un prompt es toda la información que recibe un modelo para realizar un trabajo.
 
-Un desarrollador recibe esta tarea:
+No solamente incluye:
+
+```
+La pregunta del usuario
+```
+
+También incluye:
+
+- instrucciones
+- contexto
+- ejemplos
+- restricciones
+- información adicional
+- historial de conversación
+
+Todo eso forma parte del prompt efectivo.
+
+---
+
+# El verdadero problema: la ambigüedad
+
+Supongamos que asignamos una tarea a un desarrollador nuevo del equipo.
+
+Le decimos:
 
 ```
 Haz una pantalla.
 ```
 
-¿Qué falta?
+¿Qué significa exactamente?
 
-Prácticamente todo.
+- ¿Qué framework?
+- ¿Qué diseño?
+- ¿Qué arquitectura?
+- ¿Qué validaciones?
+- ¿Qué API?
+- ¿Qué criterios de aceptación?
 
-Ahora comparemos con esto:
-
-```
-Crear una pantalla Angular 20.
-
-Debe:
-
-- Mostrar usuarios.
-- Permitir búsqueda.
-- Tener paginación.
-- Consumir la API existente.
-- Seguir el Design System corporativo.
-- Incluir tests.
-
-```
-
-El segundo ejemplo reduce enormemente la ambigüedad.
+La petición es demasiado ambigua.
 
 Con la IA ocurre exactamente lo mismo.
 
 ---
 
+# Un prompt profesional reduce incertidumbre
+
+Comparación:
+
+## Prompt básico
+
+```
+Genera un login.
+```
+
+---
+
+## Prompt profesional
+
+```
+Angular 20
+
+Aplicación empresarial
+
+JWT
+
+Refresh Token
+
+BFF
+
+Debe seguir nuestro Design System
+
+No utilizar librerías externas
+
+Generar tests
+
+Explicar las decisiones tomadas
+```
+
+Ambos piden un login.
+
+Pero solamente uno describe correctamente el problema.
+
+---
+
 # La anatomía de un prompt profesional
 
-Un prompt técnico suele tener seis partes.
+En AI Champion utilizaremos esta estructura.
 
 ```text
 Rol
@@ -97,6 +152,10 @@ Rol
 ↓
 
 Contexto
+
+↓
+
+Problema
 
 ↓
 
@@ -108,22 +167,22 @@ Restricciones
 
 ↓
 
-Formato esperado
+Resultado esperado
 
 ↓
 
 Criterios de calidad
 ```
 
-No siempre necesitaremos las seis.
+No es obligatorio utilizar siempre todas las secciones.
 
-Pero conocerlas nos permite construir solicitudes mucho más precisas.
+Pero cuanto mayor sea la complejidad del problema, más útil será esta estructura.
 
 ---
 
 # 1. Rol
 
-El rol ayuda al modelo a adoptar una perspectiva.
+Define desde qué perspectiva debe responder el modelo.
 
 Ejemplo:
 
@@ -131,181 +190,116 @@ Ejemplo:
 Actúa como un arquitecto frontend especializado en Angular.
 ```
 
-No cambia el conocimiento del modelo.
-
-Pero orienta el tipo de respuesta que priorizará.
-
 ---
 
 # 2. Contexto
 
-Es probablemente el elemento más importante.
-
-Un modelo sin contexto responde de forma genérica.
-
-Ejemplo pobre:
-
-```
-Optimiza este componente.
-```
-
-Ejemplo con contexto:
-
-```
-Aplicación Angular 20.
-
-Microfrontends.
-
-NgRx.
-
-SSR.
-
-El rendimiento inicial es lento.
-
-Analiza posibles causas.
-```
-
-Ahora el modelo tiene información suficiente para razonar.
-
----
-
-# 3. Objetivo
-
-Debemos indicar claramente qué esperamos.
+Describe el entorno donde existe el problema.
 
 Ejemplo:
 
 ```
-Quiero encontrar el cuello de botella.
+Angular 20
 
-No quiero todavía implementar cambios.
+NgRx
+
+Microfrontends
+
+Module Federation
+
+SSR
+
+Equipo de 10 desarrolladores
 ```
 
-Eso evita respuestas prematuras.
+El contexto suele ser el factor que más mejora una respuesta.
 
 ---
 
-# 4. Restricciones
+# 3. Problema
+
+Explica claramente qué sucede.
+
+Ejemplo:
+
+```
+La aplicación tarda demasiado en cargar por primera vez.
+```
+
+---
+
+# 4. Objetivo
+
+Indica qué deseas obtener.
+
+Ejemplo:
+
+```
+Analizar posibles causas.
+
+No implementar todavía.
+```
+
+---
+
+# 5. Restricciones
 
 Toda solución tiene límites.
 
 Ejemplo:
 
 ```
-No utilizar librerías externas.
+No modificar APIs públicas.
 
-Mantener compatibilidad con Angular 20.
+No cambiar arquitectura.
 
-No modificar la API pública.
-
-```
-
-Las restricciones reducen propuestas inviables.
-
----
-
-# 5. Formato esperado
-
-Muchas respuestas mejoran simplemente indicando cómo deben presentarse.
-
-Ejemplos:
-
-```
-Entrega:
-
-- Tabla comparativa.
-- Lista priorizada.
-- Diagrama Mermaid.
-- Código TypeScript.
-- Plan paso a paso.
+Mantener compatibilidad.
 ```
 
 ---
 
-# 6. Criterios de calidad
-
-También podemos definir cómo evaluar la respuesta.
+# 6. Resultado esperado
 
 Ejemplo:
 
 ```
-Prioriza:
+Quiero:
 
-- Simplicidad.
-- Rendimiento.
-- Mantenibilidad.
-- Buenas prácticas.
+- explicación
+- plan
+- prioridades
+- alternativas
 ```
 
 ---
 
-# 📊 Ejemplo completo
+# 7. Criterios de calidad
 
-Supongamos que queremos ayuda para diseñar un sistema de autenticación.
+También podemos indicar cómo evaluar la respuesta.
 
-En lugar de escribir:
+Ejemplo:
 
 ```
-Haz un login.
+Priorizar:
+
+- simplicidad
+
+- mantenibilidad
+
+- rendimiento
+
+- escalabilidad
 ```
-
-Podemos construir una especificación.
-
-```text
-ROL
-
-Arquitecto de software especializado en aplicaciones empresariales.
-
-CONTEXTO
-
-Frontend Angular 20.
-
-Backend .NET.
-
-JWT.
-
-Refresh Token.
-
-BFF.
-
-OBJETIVO
-
-Diseñar la arquitectura.
-
-No generar código todavía.
-
-RESTRICCIONES
-
-Mantener autenticación desacoplada.
-
-Compatibilidad con microfrontends.
-
-FORMATO
-
-Explica la solución.
-
-Incluye diagrama Mermaid.
-
-Compara alternativas.
-
-CRITERIOS
-
-Priorizar seguridad.
-
-Escalabilidad.
-
-Mantenibilidad.
-```
-
-La diferencia en la calidad de la respuesta suele ser enorme.
 
 ---
 
-# Conversaciones iterativas
+# La conversación es parte de la solución
 
-Otro error frecuente es esperar que todo se resuelva en un único mensaje.
+Un error frecuente consiste en esperar que todo quede resuelto con un único prompt.
 
-Un flujo profesional suele verse así:
+Los proyectos reales evolucionan.
+
+Las conversaciones también.
 
 ```mermaid
 flowchart LR
@@ -314,41 +308,35 @@ A["Problema"]
 
 --> B["Primera propuesta"]
 
---> C["Preguntas"]
+--> C["Feedback"]
 
---> D["Correcciones"]
+--> D["Nueva información"]
 
---> E["Nueva versión"]
-
---> F["Implementación"]
+--> E["Mejor solución"]
 
 ```
 
-La conversación evoluciona junto con la solución.
+La IA mejora conforme mejora el contexto.
 
 ---
 
-# La IA necesita contexto progresivo
+# El contexto es acumulativo
 
-Imagina que estás incorporando un nuevo desarrollador al equipo.
+Imagina que incorporas un desarrollador nuevo al equipo.
 
-No le entregarías únicamente esta frase:
+El primer día no conoce:
 
-```
-Implementa esto.
-```
+- arquitectura
+- negocio
+- convenciones
+- reglas
+- decisiones históricas
 
-Primero le explicarías:
+Necesita contexto.
 
-- El negocio.
-- La arquitectura.
-- Las restricciones.
-- El objetivo.
-- Las convenciones del equipo.
+La IA funciona igual.
 
-Con la IA ocurre exactamente igual.
-
-Cada interacción agrega contexto.
+Cada interacción agrega conocimiento temporal.
 
 ---
 
@@ -357,7 +345,7 @@ Cada interacción agrega contexto.
 ## Prompt demasiado corto
 
 ```
-Optimiza esto.
+Haz esto.
 ```
 
 ---
@@ -365,63 +353,42 @@ Optimiza esto.
 ## Demasiados objetivos
 
 ```
-Diseña la arquitectura.
+Diseña
 
-Genera el código.
+Programa
 
-Escribe los tests.
+Documenta
 
-Optimiza el rendimiento.
+Optimiza
 
-Haz documentación.
-
+Haz los tests
 ```
 
-Conviene dividir tareas.
+Conviene dividir.
 
 ---
 
-## Falta de contexto
+## Sin restricciones
 
 ```
-No funciona.
-
+Haz un login.
 ```
 
-El modelo necesita información para razonar.
+¿Con JWT?
 
----
+¿Con OAuth?
 
-# 💻 En la práctica
+¿Con sesiones?
 
-Cuando trabajemos con IA en AI Champion seguiremos una estructura sencilla:
+¿Con BFF?
 
-```text
-1. Contexto
-
-2. Problema
-
-3. Objetivo
-
-4. Restricciones
-
-5. Resultado esperado
-
-6. Revisión
-```
-
-Este patrón funcionará para:
-
-- Arquitectura.
-- Código.
-- Testing.
-- Refactoring.
-- Documentación.
-- Diseño de APIs.
+El modelo debe adivinar.
 
 ---
 
 # Plantilla reutilizable
+
+Durante todo el curso utilizaremos la siguiente estructura.
 
 ```text
 ## Contexto
@@ -449,42 +416,203 @@ Este patrón funcionará para:
 ...
 ```
 
-Esta será la plantilla base del resto del curso.
+Esta plantilla funcionará para:
+
+- arquitectura
+- testing
+- documentación
+- debugging
+- refactoring
+- diseño
+
+---
+
+# Del Prompt Engineering al Specification Engineering
+
+Hasta aquí hemos hablado de prompts.
+
+Pero existe un concepto aún más poderoso.
+
+Una conversación con IA puede verse como una simple petición.
+
+O puede verse como una especificación de trabajo.
+
+La diferencia es enorme.
+
+## Prompt
+
+```text
+Genera un login en Angular.
+```
+
+---
+
+## Especificación
+
+```text
+Contexto
+
+Objetivo
+
+Problema
+
+Arquitectura
+
+Restricciones
+
+Casos borde
+
+Criterios de aceptación
+
+Resultado esperado
+```
+
+La primera busca obtener código.
+
+La segunda describe completamente el trabajo.
+
+---
+
+# Prompt vs Especificación
+
+| Prompt | Especificación |
+|---------|----------------|
+| Solicita una tarea | Define un trabajo |
+| Suele ser temporal | Puede reutilizarse |
+| Centrado en una respuesta | Centrado en un proceso |
+| Difícil de versionar | Fácil de versionar |
+| Conversacional | Declarativa |
+| Pensado para un modelo | Pensado para personas y modelos |
+
+---
+
+# El siguiente paso de la industria
+
+Durante 2023 y 2024 la mayoría de los equipos aprendieron Prompt Engineering.
+
+En los próximos años veremos una evolución hacia algo diferente.
+
+Las organizaciones comenzarán a trabajar con:
+
+- especificaciones reutilizables
+- workflows
+- agentes
+- validaciones automáticas
+- ejecución basada en especificaciones
+
+En otras palabras:
+
+> Dejaremos de escribir prompts aislados para comenzar a diseñar sistemas completos de trabajo.
+
+---
+
+# 💻 En la práctica
+
+Cuando trabajemos con IA en AI Champion utilizaremos esta filosofía.
+
+```text
+Problema
+
+↓
+
+Especificación
+
+↓
+
+Conversación
+
+↓
+
+Implementación
+
+↓
+
+Validación
+
+↓
+
+Iteración
+```
+
+La IA deja de ser un generador de respuestas.
+
+Se convierte en un colaborador dentro de un proceso de ingeniería.
 
 ---
 
 # Regla AI Champion #3
 
-> **No escribas prompts. Escribe especificaciones de trabajo.**
+> **No escribas prompts. Diseña especificaciones.**
 
-Cuando piensas en términos de especificaciones, la conversación con la IA se vuelve más clara, reproducible y útil.
+---
+
+# 🧠 Para un desarrollador Senior
+
+La evolución del desarrollo asistido por IA no consiste únicamente en mejorar prompts.
+
+Consiste en construir procesos donde las especificaciones sean:
+
+- reutilizables
+- versionables
+- ejecutables
+- auditables
+
+Esta idea será la base de los próximos módulos, donde estudiaremos:
+
+- Specification Engineering
+- Specification-Driven Development (SDD)
+- OpenSpec
+- SpecKit
+- Agentes especializados
+- Your Harness
+
+Veremos cómo una misma especificación puede convertirse en la fuente de verdad para:
+
+- implementación
+- documentación
+- testing
+- validación
+- revisión
+- automatización
 
 ---
 
 # Conceptos clave
 
-- Un prompt profesional reduce la ambigüedad.
-- El contexto suele ser más importante que la longitud.
-- Dividir un problema produce mejores resultados que intentar resolverlo todo de una vez.
-- Las conversaciones iterativas generan mejores soluciones.
-- Un buen prompt se parece más a una especificación técnica que a una pregunta.
+- Un prompt reduce ambigüedad.
+- El contexto determina la calidad de la respuesta.
+- Las conversaciones evolucionan mediante iteración.
+- Las especificaciones representan un nivel superior de abstracción.
+- El futuro del desarrollo con IA estará centrado en especificaciones más que en prompts.
+
+---
+
+# Resumen
+
+Prompt Engineering fue el primer paso para colaborar con modelos de IA.
+
+Sin embargo, conforme los sistemas se vuelven más complejos, los prompts evolucionan hacia especificaciones completas que describen el problema, el contexto, las restricciones y los criterios de aceptación.
+
+En AI Champion utilizaremos esta visión durante el resto del curso.
 
 ---
 
 # 📝 Ejercicios
 
 1. ¿Por qué un prompt no debería verse como una simple pregunta?
-2. ¿Cuál de las seis partes consideras más importante y por qué?
-3. Reescribe un prompt corto que hayas utilizado recientemente utilizando la estructura propuesta.
-4. ¿Qué ventajas tiene dividir una tarea compleja en varias conversaciones?
-5. ¿Cómo influye el contexto en la calidad de la respuesta?
+2. ¿Cuál de las partes de un prompt profesional aporta más valor y por qué?
+3. Reescribe un prompt que hayas utilizado recientemente utilizando la plantilla del capítulo.
+4. Explica con tus palabras la diferencia entre un prompt y una especificación.
+5. ¿Qué ventajas tendría almacenar especificaciones en un repositorio Git?
 
 ---
 
 # 🎯 Desafío
 
-Elige una tarea real de tu trabajo.
+Toma una tarea real de tu trabajo.
 
-Construye una especificación completa utilizando la plantilla del capítulo.
+Primero descríbela mediante un prompt de una línea.
 
-Después, compárala con un prompt de una sola línea y analiza las diferencias en las respuestas obtenidas.
+Luego conviértela en una especificación completa utilizando la plantilla presentada en este capítulo.
+
+Compara los resultados obtenidos con un asistente de IA y analiza cómo cambia la calidad de las respuestas.
